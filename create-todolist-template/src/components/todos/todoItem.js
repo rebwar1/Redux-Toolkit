@@ -1,5 +1,11 @@
+import { deleteTodo } from '../../store/slices/todosSlice';
+import { useDispatch } from 'react-redux';
+
 export default function TodoItem({ todo }) {
   // why use curly brackets here? because we are destructuring the props object
+  const dispatch = useDispatch();
+
+  const todoDeleteHandler = () => dispatch(deleteTodo(todo.id));
   return (
     <div className="flex mb-4 items-center">
       <p
@@ -19,7 +25,10 @@ export default function TodoItem({ todo }) {
           Done
         </button>
       )}
-      <button className="p-1 px-2 ml-2 border-2 rounded text-red-600 border-red-600 hover:text-white hover:bg-red-600">
+      <button
+        onClick={todoDeleteHandler}
+        className="p-1 px-2 ml-2 border-2 rounded text-red-600 border-red-600 hover:text-white hover:bg-red-600"
+      >
         Remove
       </button>
     </div>
